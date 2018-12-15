@@ -1,0 +1,68 @@
+<%- include ../tamplates/header.ejs %>
+  <div class="container">
+    <br>
+    <% if(alert.message != '') { %>
+    <div class="alert alert-<%= alert.status %>">
+      <%= alert.message %>
+    </div>
+    <% } %>
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="/">Home</a></li>
+      <li class="breadcrumb-item">Data Mahasiswa</li>
+    </ol>
+    <!-- <h3>Data Mahasiswa</h3> -->
+    <a href="/mahasiswa/create" class="btn btn-primary">Tambah Data</a>
+    <br>
+    <br>
+    <div class="table-responsive-md">
+        <table class="table">
+            <thead class="table-dark">
+                <th>No</th>
+                <th>No Peserta</th>
+                <th>Nama</th>
+                <th>Nomor Telpon</th>
+                <th>Alamat</th>
+                <th>Jenis Kelamin</th>
+                <th colspan="2" style="text-align:center;">Aksi</th>
+            </thead>
+            <tbody>
+                <% for(let i = 0; i < mahasiswas.length; i++) { %>
+                    <tr>
+                        <td><%= mahasiswas[i].id %></td>
+                        <td><%= mahasiswas[i].no_peserta %></td>
+                        <td><%= mahasiswas[i].nama_siswa %></td>
+                        <td><%= mahasiswas[i].alamat %></td>
+                        <td><%= mahasiswas[i].telpon %></td>
+                        <td><%= mahasiswas[i].jenis_kelamin %></td>
+                        <td>
+                            <a href="" class="btn btn-success">Edit</a>
+                        </td>
+                        <td>
+                            <button class="btn btn-sm btn-danger btn-delete" data-id="<%= mahasiswas[i].id %>"> Delete </button>
+                        </td>
+                    </tr>
+                <% } %>
+            </tbody>
+        </table>
+    </div>
+  <%- include ../tamplates/footer.ejs %>
+
+
+  <!-- delete data mahasiswa link ke router -->
+<script type="text/javascript">
+    $('.btn-delete').click(function(){
+      let id = $(this).attr('data-id');
+      swal({
+        title: "Yakin Ingin Menghapus Data Mahasiswa ini?",
+        text: "Data yang dihapus, tidak bisa kembali lagi.",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+      })
+      .then((willDelete) => {
+        if (willDelete) {
+          window.location.assign(`/mahasiswa/delete/${id}`); // delete data mahasiswa link ke router
+        }
+      });
+    });
+</script>
