@@ -8,6 +8,11 @@
             <li class="breadcrumb-item active" aria-current="page">Edit</li>
         </ol>
     </nav>
+    <% if(alert.message != '') { %>
+        <div class="alert alert-<%= alert.status %>">
+          <%= alert.message %>
+        </div>
+    <% } %>
     <form  action="/mahasiswa/edit/<%= mahasiswa.id %>" method="POST">
         <div class="form-group">
             <label for="no_peserta">No Peserta</label>
