@@ -4,16 +4,19 @@
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
-        <ul class="navbar-nav">
-        <li class="nav-item active">
-            <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="/mahasiswa">Mahasiswa</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="/administrasi">Administrasi</a>
-        </li>
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/mahasiswa">Mahasiswa</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/administrasi">Administrasi</a>
+            </li>
         </ul>
+        <form class="form-inline my-2 my-lg-0" action="/users/logout">
+            <button class="btn btn-success my-2 my-sm-0" type="submit">Logout</button>
+        </form>
     </div>
-</nav>
+</nav>  
