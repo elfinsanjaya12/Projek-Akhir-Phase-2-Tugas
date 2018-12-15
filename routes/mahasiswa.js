@@ -18,6 +18,56 @@ router.get('/', function(req, res, next) {
     })
 });
 
+//pindah ke halamana create
+router.get('/create', (req, res) =>{
+    res.render('mahasiswa/create')
+})
+
+// membuat create
+router.post('/create', (req,res) => {
+    const { no_peserta, nama_siswa, alamat, telpon, jenis_kelamin } = req.body
+    models.Mahasiswa.create({no_peserta, nama_siswa, alamat, telpon, jenis_kelamin}).then(mahasiswa => {
+        const alertMessage = req.flash('alertMessage');
+        const alertStatus = req.flash('alertStatus');
+        const alert = { message: alertMessage, status: alertStatus};
+        res.redirect('/mahasiswa', {
+            alert: alert
+        })
+    }).catch(err => {
+        console.log(err)
+        res.redirect('/mahasiswa')
+    })
+})
+
+// pindah halaman edit
+router.get('/edit/:id', (req, res) => {
+    const mahasiswaId = req.params.id
+    models.Mahasiswa.findOne({where: {id: mahasiswaId}}).then(mahasiswa => {
+        res.render('mahasiswa/edit', {mahasiswa:mahasiswa})
+    }).catch(err => {
+      console.log(err)
+      res.redirect('/mahasiswa')
+    })
+})
+router.post('/edit/:id', (req, res) => {
+    const mahasiswaId = req.params.id
+    const { no_peserta, nama_siswa, alamat, telpon, jenis_kelamin} =  req.body
+    models.Mahasiswa.findOne({where: {id: mahasiswaId}}).then(mahasiswa => {
+        return mahasiswa.update({
+            no_peserta,
+            nama_siswa,
+            alamat,
+            telpon,
+            jenis_kelamin
+        }).then(updateMahasiswa => {
+            res.redirect('/mahasiswa')
+        })
+    }).catch(err => {
+      console.log(err)
+      res.redirect('/mahasiswa')
+    })
+})
+
 // delete data mahasiswa
 router.get('/delete/:id', (req,res) => {
     const mahasiswaId = req.params.id
@@ -31,6 +81,6 @@ router.get('/delete/:id', (req,res) => {
         console.log(err)
         res.redirect('/mahasiswa')
     })
-})
+});
 
 module.exports = router;

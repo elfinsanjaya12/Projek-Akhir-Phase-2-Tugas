@@ -1,0 +1,42 @@
+<%- include ../tamplates/header.ejs %>
+<div class="container">
+    <br>
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Home</a></li>
+            <li class="breadcrumb-item"><a href="/mahasiswa">Mahasiswa</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Create</li>
+        </ol>
+    </nav>
+    <form  action="/mahasiswa/create" method="POST">
+        <div class="form-group">
+            <label for="no_peserta">No Peserta</label>
+            <input type="text" class="form-control" id="no_peserta" name="no_peserta" placeholder="Enter no peserta">
+        </div>
+        <div class="form-group">
+            <label for="nama_siswa">Nama</label>
+            <input type="text" class="form-control" id="nama_siswa" name="nama_siswa" placeholder="Enter Nama">
+        </div>
+        <div class="form-group">
+            <label for="telpon">telpon</label>
+            <input type="text" class="form-control" id="telpon" name="telpon" placeholder="Enter Telepon">
+        </div>
+        <div class="form-group">
+            <label for="">Jenis Kelamin</label>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="jenis_kelamin" id="jenis_kelamin" value="pria">
+                <label class="form-check-label" for="pria">Pria</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="jenis_kelamin" id="jenis_kelamin" value="wanita">
+                <label class="form-check-label" for="wanita">Wanita</label>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="alamat">Alamat</label>
+            <textarea class="form-control" id="alamat"  name="alamat" rows="3"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+<%- include ../tamplates/footer.ejs %></div>
