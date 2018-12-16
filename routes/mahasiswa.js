@@ -1,20 +1,31 @@
 var express = require('express');
 var router = express.Router();
-const models = require('../models')
-const { checkAuth } = require('../middlewares/auth')
+const models = require('../models');
+const { checkAuth } = require('../middlewares/auth');
 
 // menampilkan semua data mahasiswa
 router.get('/', checkAuth, function(req, res, next) {
     const user = req.session.user
-    models.Mahasiswa.findAll().then(mahasiswas => {
+    let page = req.query.page || 1;
+    let offset = 0;
+    if (page > 1) {
+        offset = ((page - 1) * 5)  + 1;
+    }
+    models.Mahasiswa.findAndCountAll({
+        limit : 5,
+        offset: offset,
+        order : [['id','DESC']]
+    }).then(mahasiswas => {
         const alertMessage = req.flash('alertMessage');
         const alertStatus = req.flash('alertStatus');
         const alert = { message: alertMessage, status: alertStatus};
+        const totalPage = Math.ceil(mahasiswas.count / 5);
+        const pagination = {totalPage : totalPage, currentPage: page};  
         res.render('mahasiswa/index', {
             user:user,
-            mahasiswas:mahasiswas,
+            mahasiswas:mahasiswas.rows,
             alert: alert,
-
+            pagination: pagination,
         })
     }).catch(err => {
         console.log(err)
@@ -92,7 +103,7 @@ router.post('/edit/:id',checkAuth, (req, res) => {
 })
 
 // delete data mahasiswa
-router.get('/delete/:id', (req,res) => {
+router.get('/delete/:id', checkAuth, (req,res) => {
     const user = req.session.user
     let mahasiswaId = req.params.id;
     models.Mahasiswa.findOne({where: {id: mahasiswaId}}).then(mahasiswa =>{

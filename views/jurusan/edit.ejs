@@ -1,0 +1,32 @@
+<%- include ../tamplates/header.ejs %>
+<div class="container">
+    <br>
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Home</a></li>
+            <li class="breadcrumb-item"><a href="/jurusan">Jurusan</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Create</li>
+        </ol>
+    </nav>
+    <% if(alert.message != '') { %>
+        <div class="alert alert-<%= alert.status %>">
+          <%= alert.message %>
+        </div>
+    <% } %>
+    <div class="alert alert-warning" role="alert">
+        Kode Jurusan harus diawali dengan IF | SI | TK dan diikuti’ dengan 4 digit angka !!!
+    </div>
+    <form  action="/jurusan/create" method="POST">
+        <div class="form-group">
+            <label for="kode">Kode</label>
+            <input type="text" class="form-control" id="kode" name="kode" placeholder="Enter Kode" required value="<%= jurusan.kode %>">
+        </div>
+        <div class="form-group">
+            <label for="nama">Jurusan</label>
+            <input type="text" class="form-control" id="nama" name="nama" placeholder="Jurusan" required value="<%= jurusan.nama %>">
+        </div>
+        <button type="submit" class="btn btn-primary">Edit</button>
+        <button type="reset" class="btn btn-danger">Reset</button>
+    </form>
+</div>
+<%- include ../tamplates/footer.ejs %></div>

@@ -8,44 +8,38 @@
     <% } %>
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a href="/">Home</a></li>
-      <li class="breadcrumb-item">Data Mahasiswa</li>
+      <li class="breadcrumb-item">Data Jurusan</li>
     </ol>
     <!-- <h3>Data Mahasiswa</h3> -->
-    <a href="/mahasiswa/create" class="btn btn-primary">Tambah Data</a>
+    <a href="/jurusan/create" class="btn btn-primary">Tambah Jurusan</a>
     <br>
     <br>
     <div class="table-responsive-md">
         <table class="table">
             <thead class="table-dark">
                 <th>No</th>
-                <th>No Peserta</th>
-                <th>Nama</th>
-                <th>Alamat</th>
-                <th>Nomor Telpon</th>
-                <th>Jenis Kelamin</th>
+                <th>Kode Jurusan</th>
+                <th>Nama Jurusan</th>
                 <th colspan="2" style="text-align:center;">Aksi</th>
             </thead>
             <tbody>
-                <% for(var i = 0; i < mahasiswas.length; i++) { %>
+                <% for(var i = 0; i < jurusans.length; i++) { %>
                     <tr>
-                        <td><%= mahasiswas[i].id %></td>
-                        <td><%= mahasiswas[i].no_peserta %></td>
-                        <td><%= mahasiswas[i].nama_siswa %></td>
-                        <td><%= mahasiswas[i].alamat %></td>
-                        <td><%= mahasiswas[i].telpon %></td>
-                        <td><%= mahasiswas[i].jenis_kelamin %></td>
+                        <td><%= jurusans[i].id %></td>
+                        <td><%= jurusans[i].kode %></td>
+                        <td><%= jurusans[i].nama %></td>
                         <td>
-                            <a href="/mahasiswa/edit/<%= mahasiswas[i].id %>" class="btn btn-success">Edit</a>
+                            <a href="/jurusan/edit/<%= jurusans[i].id %>" class="btn btn-success">Edit</a>
                         </td>
                         <td>
-                            <button class="btn btn-sm btn-danger btn-delete" data-id="<%= mahasiswas[i].id %>"> Delete </button>
+                            <button class="btn btn-sm btn-danger btn-delete" data-id="<%= jurusans[i].id %>"> Delete </button>
                         </td>
                     </tr>
                 <% } %>
             </tbody>
         </table>
     </div>
-    <% var paginationFor = "mahasiswa" %>
+    <% var paginationFor = "jurusan" %>
     <%- include ../tamplates/pagination.ejs %>
 
     <%- include ../tamplates/footer.ejs %>
@@ -54,7 +48,7 @@
     $('.btn-delete').click(function(){
       let id = $(this).attr('data-id');
       swal({
-        title: "Yakin Ingin Menghapus Data Mahasiswa ini?",
+        title: "Yakin Ingin Menghapus Data Jurusan ini?",
         text: "Data yang dihapus, tidak bisa kembali lagi.",
         icon: "warning",
         buttons: true,
@@ -62,7 +56,7 @@
       })
       .then((willDelete) => {
         if (willDelete) {
-          window.location.assign(`/mahasiswa/delete/${id}`); // delete data mahasiswa link ke router
+          window.location.assign(`/jurusan/delete/${id}`); // delete data mahasiswa link ke router
         }
       });
     });

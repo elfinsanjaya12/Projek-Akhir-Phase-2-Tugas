@@ -11,6 +11,7 @@ const session = require('express-session');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 const mahasiswaRouter = require('./routes/mahasiswa')
+const jurusanRouter = require('./routes/jurusan')
 
 var app = express();
 
@@ -25,11 +26,12 @@ app.use(cookieParser('keyboard cat'));//tambahan
 app.use(express.static(path.join(__dirname, 'public')));
 // tambahan
 app.use(flash())
-app.use(session({ cookie: { maxAge: 60000 }}));
+app.use(session({secret: 'keyboard cat', cookie:{  }}))
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/mahasiswa', mahasiswaRouter);
+app.use('/jurusan', jurusanRouter);
 
 //body parser
 app.use(bodyParser.urlencoded({

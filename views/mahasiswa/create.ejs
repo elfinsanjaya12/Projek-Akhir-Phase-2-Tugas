@@ -16,15 +16,15 @@
     <form  action="/mahasiswa/create" method="POST">
         <div class="form-group">
             <label for="no_peserta">No Peserta</label>
-            <input type="text" class="form-control" id="no_peserta" name="no_peserta" placeholder="Enter no peserta">
+            <input type="text" class="form-control" id="no_peserta" name="no_peserta" placeholder="Enter no peserta" required>
         </div>
         <div class="form-group">
             <label for="nama_siswa">Nama</label>
-            <input type="text" class="form-control" id="nama_siswa" name="nama_siswa" placeholder="Enter Nama">
+            <input type="text" class="form-control" id="nama_siswa" name="nama_siswa" placeholder="Enter Nama" required>
         </div>
         <div class="form-group">
             <label for="telpon">telpon</label>
-            <input type="text" class="form-control" id="telpon" name="telpon" placeholder="Enter Telepon">
+            <input type="text" class="form-control" id="telpon" name="telpon" placeholder="Enter Telepon" required>
         </div>
         <div class="form-group">
             <label for="">Jenis Kelamin</label>
@@ -39,7 +39,7 @@
         </div>
         <div class="form-group">
             <label for="alamat">Alamat</label>
-            <textarea class="form-control" id="alamat"  name="alamat" rows="3"></textarea>
+            <textarea class="form-control" id="alamat"  name="alamat" rows="3" required></textarea>
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
